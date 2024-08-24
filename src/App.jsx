@@ -1,16 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
 import './App.css'
+import { Routes , Route } from 'react-router-dom'
+import Home from './components/Home'
+import Details from './components/Details'
+import {  DataProvider } from './Contexts/DataContext'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <h1 className='text-3xl text-blue-400 '>name </h1>
-    </>
-  )
+
+   
+      <div className='h-screen w-screen flex  '>
+     
+        <Routes>
+        <Route  path='/' element={<Home/>}  />
+        <Route path='/details/:id' element={<Details/>}/>
+        </Routes>
+
+      </div>
+      
+
+      
+   
+  ) 
 }
 
 export default App
