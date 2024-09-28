@@ -3,7 +3,7 @@ import './App.css'
 import { Routes , Route } from 'react-router-dom'
 import Home from './components/Home'
 import Details from './components/Details'
-import {  DataProvider } from './Contexts/DataContext'
+
 
 function App() {
 
@@ -15,13 +15,14 @@ function App() {
         <Routes>
         <Route  path='/' element={<Home/>}  />
         <Route path='/details/:id' element={<Details/>}/>
+       
         </Routes>
 
       </div>
       
 
       
-   
+    
   ) 
 }
 

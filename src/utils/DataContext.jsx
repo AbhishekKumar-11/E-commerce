@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import axios from '../utils/axios'
 
  export const DataContext = createContext([]);
 
@@ -6,16 +7,24 @@ import { createContext, useEffect, useState } from "react";
   export function DataProvider  ({children})  {
 
      const [data , setdata] = useState([]); 
-
+        
+   const getProducts = async  () =>{
+    try {
+        const response = await axios("/products");
+     // console.log(response.data);
+      setdata(response.data);
+    } catch (error) {
+      console.log(error);
+      
+    }
+   }
   
    useEffect(  () =>{
-     fetch('https://fakestoreapi.com/products')
-   .then(res=>res.json())
-   .then(json=>setdata(json));
+    getProducts();
    
   } ,[]);
-  console.log(data)
 
+ // console.log(data);
 
 return (
   <>
