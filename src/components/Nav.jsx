@@ -1,14 +1,16 @@
-import React, { useContext } from 'react'
-import {Link, NavLink} from 'react-router-dom'
+import React, { useContext, useEffect } from 'react'
+import {Link, NavLink, useLocation} from 'react-router-dom'
 import { DataContext } from '../utils/DataContext';
+import axios from '../utils/axios';
 function Nav() {
 
-  const {data}  = useContext(DataContext) ;
+  const [data ,setData  ]  = useContext(DataContext) ;
  // console.log(data);
  
   let dictictCategories = data && data.reduce((acc,cv)=>[...acc,cv.category
-  ],[]);
+],[]);
   dictictCategories = [...new Set(dictictCategories)]
+
 
 
   function color(){

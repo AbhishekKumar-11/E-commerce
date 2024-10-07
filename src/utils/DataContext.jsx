@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import axios from '../utils/axios'
 
- export const DataContext = createContext([]);
+ export const DataContext = createContext(null);
 
 
   export function DataProvider  ({children})  {
@@ -10,7 +10,7 @@ import axios from '../utils/axios'
         
    const getProducts = async  () =>{
     try {
-        const response = await axios("/products");
+        const response = await axios.get("/products");
      // console.log(response.data);
       setdata(response.data);
     } catch (error) {
@@ -27,12 +27,12 @@ import axios from '../utils/axios'
  // console.log(data);
 
 return (
-  <>
+  
  
-  <DataContext.Provider value={{data}} >
+  <DataContext.Provider value={[ data ,setdata]} >
   {children}
   </DataContext.Provider>
-  </>
+  
 )
 
  }
