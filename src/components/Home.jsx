@@ -38,7 +38,7 @@ function Home() {
 
     useEffect(() =>{
       if(decodedValue != 'undefined')filterData();
-      else{console.log("uhvgui")
+      else{ //console.log("uhvgui")
         if(data)setfilteredP([...data])
       }
     },[search,data])
