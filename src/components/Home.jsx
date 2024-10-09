@@ -11,24 +11,23 @@ function Home() {
       
 
   const [data , setData]   =  useContext(DataContext) ;
- // console.log(data);
+;
   const [filterdP ,setfilteredP] = useState(null);
 
-  // console.log(filterdP );
+  
   
    const {search , pathname}=  useLocation();
 
    const decodedValue =  decodeURIComponent(search.split('=')[1]);
 
-   //console.log(decodedValue);
+   
     
     async function filterData () {
       try {
         const {data} =  await axios.get(`products/category/${decodedValue}`)
-        // console.log("first")
-        // console.log(data); 
+       
         setfilteredP(data);      
-       // console.log("second") 
+       
       } catch (error) {
 
         console.log(error);
@@ -38,7 +37,7 @@ function Home() {
 
     useEffect(() =>{
       if(decodedValue != 'undefined')filterData();
-      else{ //console.log("uhvgui")
+      else{
         if(data)setfilteredP([...data])
       }
     },[search,data])
@@ -48,7 +47,7 @@ function Home() {
    
   
 
-   {  filterdP ? <>  <Nav/>
+   {(filterdP &&  filterdP) ? <>  <Nav/>
     <div   className='h-full w-[85%]  p-12 pt-[5%] flex flex-wrap overflow-x-hidden overflow-y-auto'>
 
 {filterdP.map((product , index)=>(
