@@ -1,33 +1,39 @@
-import React, {  useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import React, {  useContext, useEffect, useState } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import Loading from './Loading';
 import axios from '../utils/axios';
+import { DataContext } from '../utils/DataContext';
 
 function Details() {
 
+  const [ data ,setdata]  =  useContext(DataContext);
   
+  //console.log(data)
+  const [product , setProduct ] = useState(null);
   const{id} =   useParams();
-    const [data,setData] =  useState(null); 
+  //console.log(id);
+  
+   // const [data,setData] =  useState(null); 
     const getProduct  = async ()=>{
-      const product = await axios.get(`/products/${id}`)
-    //  console.log(product.data);
-      setData(product.data);
+      setProduct(data.filter((p) => p.id == id)[0])  ;
       
+     // console.log(product)
     }
-   getProduct() ;
+    useEffect(()=>{ getProduct() },[product])
+  
     
     //console.log(data);
     
   return (
-    <> {data ? 
+    <> {product ? 
       <div className='w-[70%] h-full  m-auto px-[5%] py-[10%]   flex  '>
-   <img className='h-[80%] w-[50%] object-contain' src={data.image}  alt=''/>
+   <img className='h-[80%] w-[50%] object-contain' src={product.image}  alt=''/>
    <div className=' content h-full w-full flex flex-col px-20  py-2'>
     
-    <h1 className='text-4xl '>{data.title} </h1>
-    <h3 className='text-zinc-400 my-5'>{data.category}</h3>
-    <h2 className='text-red-300'>${data.price} </h2>
-    <p className='my-4'>{data.description}</p>
+    <h1 className='text-4xl '>{product.title} </h1>
+    <h3 className='text-zinc-400 my-5'>{product.category}</h3>
+    <h2 className='text-red-300'>${product.price} </h2>
+    <p className='my-4'>{product.description}</p>
   <div className='my-5 '>
   <Link className='px-3 py-5  border rounded border-blue-200 text-blue-200 w-[80%] text-center
     '>Edit</Link>

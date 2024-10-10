@@ -1,28 +1,41 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { DataContext } from '../utils/DataContext';
+import { nanoid } from 'nanoid';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const Create = () => {
-    const [image,setImage]  = useState();
-    const [title,setTitle]  = useState();
-    const [category,setCategory]  = useState();
-    const [price,setPrice]  = useState();
-    const [description,setdescription]  = useState();
 
+    const [data , setdata]  = useContext(DataContext);
+    const [image,setImage]  = useState("");
+    const [title,setTitle]  = useState("");
+    const [category,setCategory]  = useState("");
+    const [price,setPrice]  = useState("");
+    const [description,setdescription]  = useState("");
+    const navigate = useNavigate();
       function handleClick(e)  {
            e.preventDefault();
-           console.log({
+           if(title.trim().length < 5 || category.length < 5 || price.length <1 || description.trim().length < 5){
+              alert("the fields must be filled with at least 4 characters. ");
+
+
+              return ;
+           }
+           let newproduct = {
+            id:nanoid(),
             image,
             title,
             category,
             price,
             description
 
-           })
+           }
            
-
+           setdata([...data , newproduct]);
+           navigate("/");
       }
     
   return (
-    <form className='w-1/2   ml-[25%] p-20  flex  flex-col gap-4'>
+    <form onSubmit={ (e) => handleClick(e)} className='w-1/2   ml-[25%] p-20  flex  flex-col gap-4'>
          <label>Add New Product</label>
           <input 
           className='bg-slate-100 rounded w-full h-10 p-2.5 focus:outline-none focus:ring focus:border-blue-500'
@@ -51,7 +64,7 @@ const Create = () => {
 
             <input 
           className='bg-slate-100 rounded w-full h-10 p-2.5 focus:outline-none focus:ring focus:border-blue-500'
-          type="text" 
+          type="number" 
           value={price}
           placeholder='price'
           onChange={(e) => setPrice(e.target.value) }
@@ -66,7 +79,7 @@ const Create = () => {
             rows='10'
             />
 
-         <button onClick={ (e) => handleClick(e)} className='px-3 py-5  border rounded border-blue-200 text-blue-200
+         <button  className='px-3 py-5  border rounded border-blue-200 text-blue-200
     '>Add new Product </button>
 
     </form>
