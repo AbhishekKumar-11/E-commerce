@@ -1,28 +1,28 @@
 import { createContext, useEffect, useState } from "react";
 import axios from '../utils/axios'
 
- export const DataContext = createContext(null);
+ export const DataContext = createContext();
 
 
   export function DataProvider  ({children})  {
 
-     const [data , setdata] = useState([]); 
+     const [data , setdata] = useState( JSON.parse(localStorage.getItem("data")) ||null); 
         
-   const getProducts = async  () =>{
-    try {
-        const response = await axios.get("/products");
-     // console.log(response.data);
-      setdata(response.data);
-    } catch (error) {
-      console.log(error);
+  //  const getProducts = async  () =>{
+  //   try {
+  //       const response = await axios.get("/products");
+  //    // console.log(response.data);
+  //     setdata(response.data);
+  //   } catch (error) {
+  //     console.log(error);
       
-    }
-   }
+  //   }
+  //  }
   
-   useEffect(  () =>{
-    getProducts();
+  //  useEffect(  () =>{
+  //   getProducts();
    
-  } ,[]);
+  // } ,[]);
 
  // console.log(data);
 

@@ -7,46 +7,47 @@ import axios from '../utils/axios';
 
 
 
+
 function Home() { 
       
 
   const [data , setData]   =  useContext(DataContext) ;
 ;
-  const [filterdP ,setfilteredP] = useState(null);
+  const [filterdP ,setfilteredP] = useState();
 
-  
-  
+   // console.log(filterdP);
+    
+   
    const {search , pathname}=  useLocation();
 
    const decodedValue =  decodeURIComponent(search.split('=')[1]);
 
    
     
-    async function filterData () {
-      try {
-        const {data} =  await axios.get(`products/category/${decodedValue}`)
+    // async function filterData () {
+    //   try {
+    //     const {data} =  await axios.get(`products/category/${decodedValue}`)
        
-        setfilteredP(data);      
+    //     setfilteredP(data);      
        
-      } catch (error) {
+    //   } catch (error) {
 
-        console.log(error);
+    //     console.log(error);
 
-      }
-    }
+    //   }
+    // }
 
     useEffect(() =>{
-      if(decodedValue != 'undefined')filterData();
-      else{
-        if(data)setfilteredP([...data])
+      if(decodedValue != 'undefined'){
+        setfilteredP(data.filter((p) => p.category==decodedValue));
       }
-    },[search,data])
+      else{
+        if(data)setfilteredP( [...data])
+      }
+    },[data,search])
   
   return (
     <>
-   
-  
-
    {(filterdP &&  filterdP) ? <>  <Nav/>
     <div   className='h-full w-[85%]  p-12 pt-[5%] flex flex-wrap overflow-x-hidden overflow-y-auto'>
 

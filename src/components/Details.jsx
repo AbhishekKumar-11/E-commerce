@@ -7,7 +7,7 @@ import { DataContext } from '../utils/DataContext';
 function Details() {
 
   const [ data ,setdata]  =  useContext(DataContext);
-  
+  const navigate = useNavigate();
   //console.log(data)
   const [product , setProduct ] = useState(null);
   const{id} =   useParams();
@@ -20,9 +20,13 @@ function Details() {
      // console.log(product)
     }
     useEffect(()=>{ getProduct() },[product])
-  
-    
-    //console.log(data);
+
+   function  deleHandler (pid)  {
+     
+    setdata( data.filter((p) => p.id !== pid) );
+      navigate("/");
+
+    }
     
   return (
     <> {product ? 
@@ -37,8 +41,8 @@ function Details() {
   <div className='my-5 '>
   <Link className='px-3 py-5  border rounded border-blue-200 text-blue-200 w-[80%] text-center
     '>Edit</Link>
-    <Link className='px-3 py-5  border rounded border-red-200 text-red-200 w-[30%] text-center ml-10
-    '>Delete</Link>
+    <button onClick={ () => deleHandler(product.id)}  className='px-3 py-5  border rounded border-red-200 text-red-200 w-[30%] text-center ml-10
+    '>Delete</button>
   </div>
    
    </div>
