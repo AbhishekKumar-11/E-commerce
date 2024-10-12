@@ -15,7 +15,7 @@ function Home() {
 ;
   const [filterdP ,setfilteredP] = useState();
 
-   // console.log(filterdP);
+    console.log(filterdP);
     
    
    const {search , pathname}=  useLocation();
@@ -36,10 +36,10 @@ function Home() {
 
     //   }
     // }
-
+ 
     useEffect(() =>{
       if(decodedValue != 'undefined'){
-        setfilteredP(data.filter((p) => p.category==decodedValue));
+        setfilteredP(data.filter((p) => p.category.trim()==decodedValue));
       }
       else{
         if(data)setfilteredP( [...data])

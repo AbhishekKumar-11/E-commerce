@@ -24,6 +24,7 @@ function Details() {
    function  deleHandler (pid)  {
      
     setdata( data.filter((p) => p.id !== pid) );
+    localStorage.setItem("data",JSON.stringify( data.filter((p) => p.id !== pid) ))  ; 
       navigate("/");
 
     }

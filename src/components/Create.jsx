@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { DataContext } from '../utils/DataContext';
 import { nanoid } from 'nanoid';
-import { Navigate, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 
 const Create = () => {
 
@@ -15,9 +15,7 @@ const Create = () => {
       function handleClick(e)  {
            e.preventDefault();
            if(title.trim().length < 5 || category.length < 5 || price.length <1 || description.trim().length < 5){
-              alert("the fields must be filled with at least 4 characters. ");
-
-
+              alert ("the fields must be filled with at least 4 characters. ");
               return ;
            }
            let newproduct = {

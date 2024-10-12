@@ -7,8 +7,8 @@ function Nav() {
   const [data ,setData  ]  = useContext(DataContext) ;
  // console.log(data);
  
-  let dictictCategories = data && data.reduce((acc,cv)=>[...acc,cv.category
-],[]);
+  let dictictCategories = data && data.reduce((acc,cv)=>[...acc,cv.category.trim()],[]);
+ // console.log(dictictCategories);
   dictictCategories = [...new Set(dictictCategories)]
 
 

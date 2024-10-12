@@ -6,25 +6,24 @@ import axios from '../utils/axios'
 
   export function DataProvider  ({children})  {
 
-     const [data , setdata] = useState( JSON.parse(localStorage.getItem("data")) ||null); 
+     const [data , setdata] = useState( JSON.parse(localStorage.getItem("data")) || null); 
         
-   const getProducts = async  () =>{
-    try {
-        const response = await axios.get("/products");
-     // console.log(response.data);
-      setdata(response.data);
-    } catch (error) {
-      console.log(error);
+  //  const getProducts = async  () =>{
+  //   try {
+  //       const response = await axios.get("/products");
+  //    // console.log(response.data);
+  //     setdata(JSON.parse(localStorage.getItem("data"))||response.data);
+  //   } catch (error) {
+  //     console.log(error);
       
-    }
-   }
+  //   }
+  //  }
   
-   useEffect(  () =>{
-    getProducts();
-   
-  } ,[]);
+  //  useEffect(  () =>{
+  //   getProducts();
+  // } ,[]);
 
- console.log(data);
+// console.log(data);
 
 return (
   
