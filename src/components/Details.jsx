@@ -3,21 +3,23 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import Loading from './Loading';
 import axios from '../utils/axios';
 import { DataContext } from '../utils/DataContext';
+import { toast } from 'react-toastify';
+
 
 function Details() {
 
   const [ data ,setdata]  =  useContext(DataContext);
   const navigate = useNavigate();
-  //console.log(data)
+
   const [product , setProduct ] = useState(null);
   const{id} =   useParams();
-  //console.log(id);
-  
-   // const [data,setData] =  useState(null); 
+
+
     const getProduct  = async ()=>{
+      
       setProduct(data.filter((p) => p.id == id)[0])  ;
       
-     // console.log(product)
+   
     }
     useEffect(()=>{ getProduct() },[product])
 
@@ -25,9 +27,15 @@ function Details() {
      
     setdata( data.filter((p) => p.id !== pid) );
     localStorage.setItem("data",JSON.stringify( data.filter((p) => p.id !== pid) ))  ; 
+    toast.error("The product has been deleted"); 
       navigate("/");
+     
+      
 
     }
+  
+    const index =  data.findIndex((p) => p.id == id) ; 
+    
     
   return (
     <> {product ? 
@@ -40,7 +48,7 @@ function Details() {
     <h2 className='text-red-300'>${product.price} </h2>
     <p className='my-4'>{product.description}</p>
   <div className='my-5 '>
-  <Link className='px-3 py-5  border rounded border-blue-200 text-blue-200 w-[80%] text-center
+  <Link  to={`/edit/${index}`}  className='px-3 py-5  border rounded border-blue-200 text-blue-200 w-[80%] text-center
     '>Edit</Link>
     <button onClick={ () => deleHandler(product.id)}  className='px-3 py-5  border rounded border-red-200 text-red-200 w-[30%] text-center ml-10
     '>Delete</button>

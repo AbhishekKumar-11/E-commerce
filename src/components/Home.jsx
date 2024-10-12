@@ -15,7 +15,7 @@ function Home() {
 ;
   const [filterdP ,setfilteredP] = useState();
 
-    console.log(filterdP);
+   
     
    
    const {search , pathname}=  useLocation();
@@ -24,18 +24,18 @@ function Home() {
 
    
     
-    // async function filterData () {
-    //   try {
-    //     const {data} =  await axios.get(`products/category/${decodedValue}`)
+    async function filterData () {
+      try {
+        const {data} =  await axios.get(`products/category/${decodedValue}`)
        
-    //     setfilteredP(data);      
+        setfilteredP(data);      
        
-    //   } catch (error) {
+      } catch (error) {
 
-    //     console.log(error);
+        console.log(error);
 
-    //   }
-    // }
+      }
+    }
  
     useEffect(() =>{
       if(decodedValue != 'undefined'){
@@ -56,7 +56,7 @@ function Home() {
    
    <div className='w-full h-[80%] bg-contain bg-no-repeat bg-center mb-5 ' 
     style={{backgroundImage:`url(${product.image})`,}}></div> 
-    <h1 className=''> {product.title} </h1>
+    <h1 className=''> { product.title.length > 30 ?product.title.slice(0,30) + `...` : product.title} </h1>
  </Link>
 ))}
 

@@ -5,10 +5,10 @@ import axios from '../utils/axios';
 function Nav() {
 
   const [data ,setData  ]  = useContext(DataContext) ;
- // console.log(data);
+
  
   let dictictCategories = data && data.reduce((acc,cv)=>[...acc,cv.category.trim()],[]);
- // console.log(dictictCategories);
+
   dictictCategories = [...new Set(dictictCategories)]
 
 
@@ -16,7 +16,7 @@ function Nav() {
   function color(){
       return `rgba(${(Math.random()*255).toFixed()},${(Math.random()*255).toFixed()},${(Math.random()*255).toFixed()},0.5)`
   }
-   //   console.log(color())
+  
   return (
     <nav className='w-[15%] h-full bg-zinc-100 flex flex-col items-center pt-5'>
     <a href='/create' className='px-3 py-5  border rounded border-blue-200 text-blue-200
