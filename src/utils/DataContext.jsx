@@ -13,6 +13,7 @@ import axios from '../utils/axios'
         const response = await axios.get("/products");
     
       setdata(JSON.parse(localStorage.getItem("data"))||response.data);
+      localStorage.setItem("data" , JSON.stringify(data));
     } catch (error) {
       console.log(error);
       
