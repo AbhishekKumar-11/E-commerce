@@ -19,8 +19,8 @@ function Nav() {
   
   return (
     <nav className='w-[15%] h-full bg-zinc-100 flex flex-col items-center pt-5'>
-    <a href='/create' className='px-3 py-5  border rounded border-blue-200 text-blue-200
-    '>Add new Product </a>
+    <NavLink to={'/create'} className='px-3 py-5  border rounded border-blue-200 text-blue-200
+    '>Add new Product </NavLink>
     <hr className='w-full mt-3'/>
     <h1 className='text-2xl  mb-3 w-[80%] '>Category Filter </h1> 
     <div className='w-[80%] '>
