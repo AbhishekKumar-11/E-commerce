@@ -8,10 +8,17 @@ export function DataProvider ({ children }) {
 
   const getProducts = async () => {
     try {
-      const response = await axios.get('/products')
-
-      setdata(response.data)
+      
+      if(data == null){
+        const response = await axios.get('/products')
+        setdata(response.data)
       localStorage.setItem('data', JSON.stringify(response.data))
+      console.log("api call done");
+      }else{
+        console.log("api cal not done");
+        console.log(data);
+      }
+     
     } catch (error) {
       console.log(error)
     }

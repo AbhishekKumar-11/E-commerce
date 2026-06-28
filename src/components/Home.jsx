@@ -8,7 +8,7 @@ import axios from "../utils/axios";
 function Home() {
   const [data, setData] = useContext(DataContext);
 
-  const [filterdP, setfilteredP] = useState();
+  const [filterdP, setfilteredP] = useState(null);
 
   const { search, pathname } = useLocation();
 
@@ -36,7 +36,7 @@ function Home() {
 
   return (
     <>
-      {filterdP && filterdP ? (
+      { filterdP ? (
         <>
           {" "}
           <Nav />
