@@ -12,7 +12,7 @@ function Home() {
       
 
   const [data , setData]   =  useContext(DataContext) ;
-;
+
   const [filterdP ,setfilteredP] = useState();
 
    
@@ -27,6 +27,7 @@ function Home() {
     async function filterData () {
       try {
         const {data} =  await axios.get(`products/category/${decodedValue}`)
+       console.log(data);
        
         setfilteredP(data);      
        

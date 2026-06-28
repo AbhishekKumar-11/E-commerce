@@ -11,7 +11,8 @@ import axios from '../utils/axios'
    const getProducts = async  () =>{
     try {
         const response = await axios.get("/products");
-    
+        console.log(response);
+        
       setdata(JSON.parse(localStorage.getItem("data"))||response.data);
       localStorage.setItem("data" , JSON.stringify(data));
     } catch (error) {
