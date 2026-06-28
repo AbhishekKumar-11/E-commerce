@@ -15,7 +15,7 @@ export function DataProvider ({ children }) {
       localStorage.setItem('data', JSON.stringify(response.data))
       console.log("api call done");
       }else{
-        console.log("api cal not done");
+        console.log("api call not done");
         console.log(data);
       }
      
