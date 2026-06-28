@@ -1,33 +1,26 @@
 import React, { useContext, useEffect, useState } from "react";
 import Nav from "./Nav";
 import { Link, useLocation } from "react-router-dom";
-import { DataContext, DataProvider } from "../utils/DataContext";
+import { DataContext } from "../utils/DataContext";
 import Loading from "./Loading";
-import axios from "../utils/axios";
+
 
 function Home() {
   const [data, setData] = useContext(DataContext);
 
   const [filterdP, setfilteredP] = useState(null);
 
-  const { search, pathname } = useLocation();
+  const { search } = useLocation();
 
-  const decodedValue = decodeURIComponent(search.split("=")[1]);
+ const params = new URLSearchParams(search)
+const decodedValue = params.get('category') 
 
-  async function filterData() {
-    try {
-      const { data } = await axios.get(`products/category/${decodedValue}`);
-      console.log(data);
-
-      setfilteredP(data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+ 
 
   useEffect(() => {
-    if (decodedValue != "undefined") {
-      setfilteredP(data.filter((p) => p.category.trim() == decodedValue));
+    if(!data) return;
+    if (decodedValue != null) {
+      setfilteredP(data.filter((p) => p.category.trim() === decodedValue));
     } else {
       if (data) setfilteredP([...data]);
       
