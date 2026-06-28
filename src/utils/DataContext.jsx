@@ -1,40 +1,29 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from 'react'
 import axios from '../utils/axios'
 
- export const DataContext = createContext();
+export const DataContext = createContext()
 
+export function DataProvider ({ children }) {
+  const [data, setdata] = useState(JSON.parse(localStorage.getItem('data')) || null)
 
-  export function DataProvider  ({children})  {
-
-     const [data , setdata] = useState( JSON.parse(localStorage.getItem("data")) || null); 
-        
-   const getProducts = async  () =>{
+  const getProducts = async () => {
     try {
-        const response = await axios.get("/products");
-        console.log(response);
-        
-      setdata(JSON.parse(localStorage.getItem("data"))||response.data);
-      localStorage.setItem("data" , JSON.stringify(data));
+      const response = await axios.get('/products')
+
+      setdata(response.data)
+      localStorage.setItem('data', JSON.stringify(response.data))
     } catch (error) {
-      console.log(error);
-      
+      console.log(error)
     }
-   }
-  
-   useEffect(  () =>{
-    getProducts();
-  } ,[]);
+  }
 
+  useEffect(() => {
+    getProducts()
+  }, [])
 
-
-return (
-  
- 
-  <DataContext.Provider value={[ data ,setdata]} >
-  {children}
-  </DataContext.Provider>
-  
-)
-
- }
-
+  return (
+    <DataContext.Provider value={[data, setdata]}>
+      {children}
+    </DataContext.Provider>
+  )
+}
